@@ -19,7 +19,6 @@ import {
   ChevronUp,
   Search,
   Shield,
-  AlertTriangle,
   Database,
   Zap,
   CheckCircle2,
@@ -317,8 +316,6 @@ export default function CSVParserPage() {
   useEffect(() => {
     if (!authLoading && !user) {
       router.push("/login")
-    } else if (!authLoading && user && !user.isAdmin) {
-      router.push("/contactacion")
     }
   }, [user, authLoading, router])
 
@@ -332,27 +329,6 @@ export default function CSVParserPage() {
 
   if (!user) {
     return null
-  }
-
-  if (!user.isAdmin) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="max-w-md">
-          <CardHeader className="text-center">
-            <div className="mx-auto w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mb-4">
-              <AlertTriangle className="h-6 w-6 text-red-500" />
-            </div>
-            <CardTitle>Acceso Denegado</CardTitle>
-            <CardDescription>Esta sección solo está disponible para usuarios administradores.</CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <Button onClick={() => router.push("/contactacion")} className="w-full">
-              Volver al Dashboard
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    )
   }
 
   return (

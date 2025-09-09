@@ -3,17 +3,15 @@
 import { useAuth } from "@/contexts/auth-context"
 import { usePack } from "@/contexts/pack-context"
 import { Button } from "@/components/ui/button"
-import { LogOut, User, Phone, Upload, Users, Shield, BarChart3, Activity } from "lucide-react"
+import { LogOut, User, Phone, Upload, Users, BarChart3, Activity } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { PackSelector } from "./pack-selector"
 
 export function Navigation() {
   const { user, logout } = useAuth()
-  const { hasFeature, selectedPack } = usePack()
+  const { hasFeature } = usePack()
   const pathname = usePathname()
-
-  const hasRoles = selectedPack !== "pack1"
 
   return (
     <nav className="border-b bg-card">
@@ -24,19 +22,17 @@ export function Navigation() {
 
             {user && (
               <div className="flex items-center space-x-4">
-                {hasFeature("contactacion") && (
-                  <Link
-                    href="/contactacion"
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                      pathname === "/contactacion"
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    <Phone className="h-4 w-4" />
-                    <span>Contactación</span>
-                  </Link>
-                )}
+                <Link
+                  href="/contactacion"
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    pathname === "/contactacion"
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  }`}
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>Contactación</span>
+                </Link>
 
                 {hasFeature("vendedores") && (
                   <Link
@@ -59,90 +55,45 @@ export function Navigation() {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 {hasFeature("reportes") && (
-                  <div className="relative group">
-                    <Link
-                      href="/reportes"
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                        hasRoles
-                          ? `border-2 border-orange-500/50 bg-orange-500/10 hover:bg-orange-500/20 ${
-                              pathname === "/reportes"
-                                ? "bg-orange-500 text-white border-orange-500"
-                                : "text-orange-400 hover:text-orange-300"
-                            }`
-                          : pathname === "/reportes"
-                            ? "bg-primary text-primary-foreground"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                      }`}
-                    >
-                      {hasRoles && <Shield className="h-4 w-4" />}
-                      <BarChart3 className="h-4 w-4" />
-                      <span>Reportes</span>
-                    </Link>
-                    {hasRoles && (
-                      <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10">
-                        Solo visible para administradores
-                        <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
-                      </div>
-                    )}
-                  </div>
+                  <Link
+                    href="/reportes"
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      pathname === "/reportes"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    <BarChart3 className="h-4 w-4" />
+                    <span>Reportes</span>
+                  </Link>
                 )}
 
                 {hasFeature("auditoria") && (
-                  <div className="relative group">
-                    <Link
-                      href="/auditoria"
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                        hasRoles
-                          ? `border-2 border-orange-500/50 bg-orange-500/10 hover:bg-orange-500/20 ${
-                              pathname === "/auditoria"
-                                ? "bg-orange-500 text-white border-orange-500"
-                                : "text-orange-400 hover:text-orange-300"
-                            }`
-                          : pathname === "/auditoria"
-                            ? "bg-primary text-primary-foreground"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                      }`}
-                    >
-                      {hasRoles && <Shield className="h-4 w-4" />}
-                      <Activity className="h-4 w-4" />
-                      <span>Auditoría</span>
-                    </Link>
-                    {hasRoles && (
-                      <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10">
-                        Solo visible para administradores
-                        <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
-                      </div>
-                    )}
-                  </div>
+                  <Link
+                    href="/auditoria"
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      pathname === "/auditoria"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    <Activity className="h-4 w-4" />
+                    <span>Auditoría</span>
+                  </Link>
                 )}
 
                 {hasFeature("cargar-datos") && (
-                  <div className="relative group">
-                    <Link
-                      href="/cargar-datos"
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                        hasRoles
-                          ? `border-2 border-orange-500/50 bg-orange-500/10 hover:bg-orange-500/20 ${
-                              pathname === "/cargar-datos" || pathname === "/"
-                                ? "bg-orange-500 text-white border-orange-500"
-                                : "text-orange-400 hover:text-orange-300"
-                            }`
-                          : (pathname === "/cargar-datos" || pathname === "/")
-                            ? "bg-primary text-primary-foreground"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                      }`}
-                    >
-                      {hasRoles && <Shield className="h-4 w-4" />}
-                      <Upload className="h-4 w-4" />
-                      <span>Cargar datos</span>
-                    </Link>
-                    {hasRoles && (
-                      <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10">
-                        Solo visible para administradores
-                        <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
-                      </div>
-                    )}
-                  </div>
+                  <Link
+                    href="/cargar-datos"
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      pathname === "/cargar-datos" || pathname === "/"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    <Upload className="h-4 w-4" />
+                    <span>Cargar datos</span>
+                  </Link>
                 )}
               </div>
 
