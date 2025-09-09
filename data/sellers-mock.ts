@@ -34,7 +34,7 @@ export const sellersData: Seller[] = [
   },
   {
     id: "2",
-    name: "Rachel McAdams",
+    name: "Rachel McAdams ♥️",
     avatar: "/images/rachel-mcadams.jpg",
     totalSales: 42,
     salesAmount: 267800,
