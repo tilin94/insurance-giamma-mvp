@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/app
+      - ./node_modules:/usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - INFO_EXPERTO_API_KEY=ac381d85-8547-4857-9efd-cc4f97c00b79
+      - CHOKIDAR_USEPOLLING=true
+    working_dir: /usr/src/app
+    network_mode: host
+    command: sh -c "pnpm install && pnpm dev"
