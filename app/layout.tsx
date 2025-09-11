@@ -6,6 +6,7 @@ import { AuthProvider } from "@/contexts/auth-context"
 import { PackProvider } from "@/contexts/pack-context"
 import { Navigation } from "@/components/navigation"
 import { Suspense } from "react"
+import { SalesSlides } from "@/components/sales-slides"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -29,6 +30,7 @@ export default function RootLayout({
             <PackProvider>
               <Navigation />
               {children}
+              <SalesSlides />
             </PackProvider>
           </AuthProvider>
         </Suspense>
